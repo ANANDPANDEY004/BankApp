@@ -58,7 +58,7 @@ class Atm
     user = value[user_name]
     acc_no = user.keys.last 
     user = value.dig(user_name,acc_no)
-    user = value[user_name][acc_no]["atm"]
+    user = value[user_name][acc_no.to_s]["atm"]
       user.each do |k,v| 
         if  v.to_i == atm.to_i
           self.atm_fetch_atm_no(user_name)
@@ -92,7 +92,7 @@ class Atm
     user_data = JSON.parse(file)
     value = user_data.inject(:merge)
     user = value[user_name]
-    acc_no = user.keys.last 
+    acc_no = user.keys.last.to_s
     user = value.dig(user_name,acc_no)
     balance = user["balance"]
     rescue => e
@@ -107,7 +107,7 @@ class Atm
       user_data = JSON.parse(file)
       value = user_data.inject(:merge)
       user = value[user_name]
-      acc_no = user.keys.last 
+      acc_no = user.keys.last.to_s
       user = value.dig(user_name,acc_no)
       balance = user["balance"]
       puts "Total Balance in Your Account : #{balance}"
@@ -126,7 +126,7 @@ class Atm
       user = value[user_name]
       acc_no = user.keys.last 
       user = value.dig(user_name,acc_no)
-      user = value[user_name][acc_no]
+      user = value[user_name][acc_no.to_s]
       user["balance"]= balance 
       File.open("./user_data.json","w") do |f|
         f.write(user_data.to_json)   
@@ -145,7 +145,7 @@ class Atm
       v.each do |j,b| 
 
         if (b== atm_no)
-           balance  =b["balance"]
+              balance =b["balance"]
         end
       end
     end
